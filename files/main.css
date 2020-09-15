@@ -1,6 +1,6 @@
-@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic,300);
-@import url(//fonts.googleapis.com/css?family=Source+Serif+Pro:400,600,400italic,300);
-@import url(//fonts.googleapis.com/css?family=Crimson+Text:400,600,400italic,300);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic,300);
+@import url(https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600,400italic,300);
+@import url(https://fonts.googleapis.com/css?family=Crimson+Text:400,600,400italic,300);
 
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
 body {
