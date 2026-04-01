@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<!-- Custom styles for this template -->
+	<link href="files/main.css" rel="stylesheet">
+</head>
+
+<title>2026 Specials!</title>
+
+<body>
+	<!-- Password Protection -->
+	<div id="passwordProtection" class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 100vh; background-color: #8c1515;">
+		<div class="card" style="width: 400px;">
+			<div class="card-body">
+				<h3 class="card-title text-center mb-4">2026 Specials!</h3>
+				<p class="text-center mb-4">Please enter the access code:</p>
+				<div class="form-group">
+					<input type="text" id="passwordInput" class="form-control" placeholder="Enter access code">
+				</div>
+				<button onclick="checkPassword()" class="btn btn-primary btn-block">Access Registry</button>
+				<div id="errorMessage" class="text-danger text-center mt-2" style="display: none;">Incorrect code. Please try again.</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Main Content (Hidden until password is correct) -->
+	<div id="mainContent" style="display: none;">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #8c1515;">
+			<div class="container" style="width: 66%; margin: auto;">
+				<a class="navbar-brand" href="index.html">Junwu Zhang</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarToggle">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">← Back to Main</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container" style="padding-top: 20px; font-size: 16px; width: 66%; margin: auto">
+			<div class="row" style="margin-left: 0%">
+				<div class="col-md-12 text-center" style="padding-top: 30px;">
+					<h1>2026 Specials!</h1>
+					<p class="lead">Thank you for celebrating with me! Here are a few things I'd love:</p>
+				</div>
+			</div>
+		</div><br><br>
+
+		<!-- Registry Items -->
+		<div class="container" style="width: 66%; margin: auto;">
+			<hr>
+			
+			<div class="row">
+				<div class="col-md-3">
+					<img id="item1-image" class="img-fluid img-rounded" style="border:1px solid black; width: 150px; height: 150px; object-fit: cover;" alt="Loading...">
+				</div>
+				<div class="col-md-9">
+					<b><font color="black">Porsche Key Ring with Boxster Lettering</font></b><br>
+					Price: $65.00<br>
+					Quantity: 1<br>
+					Status: <span id="item1-status" class="badge badge-success">Available</span><br>
+					<a href="https://shop.porsche.com/us/en-US/p/key-ring-with-boxster-lettering-P-WAP0500360SBOX/WAP0500360SBOX" target="_blank"><small>[View Item]</small></a><br>
+					<button id="claim-item1" class="btn btn-sm btn-primary mt-2" onclick="claimItem('item1')">Mark as Claimed</button>
+				</div>
+			</div>
+			<hr>
+
+			<div class="row">
+				<div class="col-md-3">
+					<img id="item2-image" class="img-fluid img-rounded" style="border:1px solid black; width: 150px; height: 150px; object-fit: cover;" alt="Loading...">
+				</div>
+				<div class="col-md-9">
+					<b><font color="black">Porsche Crest Keyring Essential</font></b><br>
+					Price: $45.00<br>
+					Quantity: 1<br>
+					Status: <span id="item2-status" class="badge badge-success">Available</span><br>
+					<a href="https://shop.porsche.com/us/en-US/p/porsche-crest-keyring-essential-P-WAP0500900E/WAP0500900E" target="_blank"><small>[View Item]</small></a><br>
+					<button id="claim-item2" class="btn btn-sm btn-primary mt-2" onclick="claimItem('item2')">Mark as Claimed</button>
+				</div>
+			</div>
+			<hr>
+		</div><br><br>
+
+		<div class="container">
+			<hr>
+			<center>
+				<footer>
+					<p>&copy; 2026 Junwu Zhang</p>
+				</footer>
+			</center>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
+
+	<script>
+		// Password protection
+		function checkPassword() {
+			const password = document.getElementById('passwordInput').value;
+			const errorMessage = document.getElementById('errorMessage');
+			
+			console.log('Checking password:', password); // Debug
+			
+			if (password === '0101') {
+				console.log('Password correct, showing main content'); // Debug
+				document.getElementById('passwordProtection').style.display = 'none';
+				document.getElementById('mainContent').style.display = 'block';
+				document.getElementById('mainContent').style.visibility = 'visible';
+				document.getElementById('mainContent').style.opacity = '1';
+				
+				// Load images after successful login
+				loadImages();
+				// Restore claimed status
+				restoreClaimedStatus();
+			} else {
+				console.log('Password incorrect'); // Debug
+				errorMessage.style.display = 'block';
+				document.getElementById('passwordInput').value = '';
+				setTimeout(() => {
+					errorMessage.style.display = 'none';
+				}, 3000);
+			}
+		}
+
+		// Allow Enter key to submit password
+		document.addEventListener('DOMContentLoaded', function() {
+			document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+				if (e.key === 'Enter') {
+					checkPassword();
+				}
+			});
+		});
+
+		// Dynamic image loading
+		function loadImages() {
+			// Use direct Porsche image URLs that should work without CORS issues
+			const items = [
+				{
+					id: 'item1',
+					imageUrl: 'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500360SBOX/1/WAP0500360SBOX.png'
+				},
+				{
+					id: 'item2', 
+					imageUrl: 'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500900E/1/WAP0500900E.png'
+				}
+			];
+
+			items.forEach(item => {
+				const imgElement = document.getElementById(item.id + '-image');
+				imgElement.src = item.imageUrl;
+				imgElement.onerror = function() {
+					// If direct image fails, use a simple text-based fallback
+					imgElement.style.display = 'none';
+					const fallback = document.createElement('div');
+					fallback.style.width = '150px';
+					fallback.style.height = '150px';
+					fallback.style.border = '1px solid black';
+					fallback.style.display = 'flex';
+					fallback.style.alignItems = 'center';
+					fallback.style.justifyContent = 'center';
+					fallback.style.backgroundColor = '#8c1515';
+					fallback.style.color = 'white';
+					fallback.style.fontSize = '12px';
+					fallback.style.textAlign = 'center';
+					fallback.style.padding = '10px';
+					fallback.innerHTML = item.id === 'item1' ? 'Porsche<br>Boxster<br>Key Ring' : 'Porsche<br>Crest<br>Key Ring';
+					imgElement.parentNode.appendChild(fallback);
+				};
+			});
+		}
+
+		// Claim functionality
+		function claimItem(itemId) {
+			const statusElement = document.getElementById(itemId + '-status');
+			const buttonElement = document.getElementById('claim-' + itemId);
+			
+			if (statusElement.classList.contains('badge-success')) {
+				// Mark as claimed
+				statusElement.textContent = 'Claimed';
+				statusElement.classList.remove('badge-success');
+				statusElement.classList.add('badge-danger');
+				buttonElement.textContent = 'Mark as Available';
+				buttonElement.classList.remove('btn-primary');
+				buttonElement.classList.add('btn-secondary');
+				
+				// Save to localStorage
+				localStorage.setItem(itemId + '-claimed', 'true');
+			} else {
+				// Mark as available
+				statusElement.textContent = 'Available';
+				statusElement.classList.remove('badge-danger');
+				statusElement.classList.add('badge-success');
+				buttonElement.textContent = 'Mark as Claimed';
+				buttonElement.classList.remove('btn-secondary');
+				buttonElement.classList.add('btn-primary');
+				
+				// Remove from localStorage
+				localStorage.removeItem(itemId + '-claimed');
+			}
+		}
+
+		// Restore claimed status on load
+		function restoreClaimedStatus() {
+			const items = ['item1', 'item2'];
+			items.forEach(itemId => {
+				if (localStorage.getItem(itemId + '-claimed') === 'true') {
+					const statusElement = document.getElementById(itemId + '-status');
+					const buttonElement = document.getElementById('claim-' + itemId);
+					
+					statusElement.textContent = 'Claimed';
+					statusElement.classList.remove('badge-success');
+					statusElement.classList.add('badge-danger');
+					buttonElement.textContent = 'Mark as Available';
+					buttonElement.classList.remove('btn-primary');
+					buttonElement.classList.add('btn-secondary');
+				}
+			});
+		}
+	</script>
+
+</body>
+
+</html>
