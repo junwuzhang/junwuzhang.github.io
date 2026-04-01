@@ -33,7 +33,7 @@
 
 	<!-- Main Content (Hidden until password is correct) -->
 	<div id="mainContent" style="display: none;">
-		<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #8c1515;">
+		<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #8c1515;">
 			<div class="container" style="width: 66%; margin: auto;">
 				<a class="navbar-brand" href="index.html">Junwu Zhang</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle">
@@ -120,30 +120,17 @@
 			const password = document.getElementById('passwordInput').value;
 			const errorMessage = document.getElementById('errorMessage');
 			
-			console.log('Checking password:', password); // Debug
-			
 			if (password === '0101') {
-				console.log('Password correct, showing main content'); // Debug
-				
-				// Force hide password section
-				const passwordDiv = document.getElementById('passwordProtection');
-				passwordDiv.style.display = 'none';
-				passwordDiv.style.visibility = 'hidden';
-				passwordDiv.style.opacity = '0';
-				
-				// Force show main content
-				const mainDiv = document.getElementById('mainContent');
-				mainDiv.style.display = 'block';
-				mainDiv.style.visibility = 'visible';
-				mainDiv.style.opacity = '1';
-				mainDiv.style.position = 'static';
+				// Hide password screen
+				document.getElementById('passwordProtection').style.display = 'none';
+				// Show main content
+				document.getElementById('mainContent').style.display = 'block';
 				
 				// Load images after successful login
 				loadImages();
 				// Restore claimed status
 				restoreClaimedStatus();
 			} else {
-				console.log('Password incorrect'); // Debug
 				errorMessage.style.display = 'block';
 				document.getElementById('passwordInput').value = '';
 				setTimeout(() => {
@@ -161,51 +148,31 @@
 			});
 		});
 
-		// Dynamic image loading
+		// Simple image loading - use direct URLs
 		function loadImages() {
-			// Use direct Porsche image URLs that should work without CORS issues
-			const items = [
-				{
-					id: 'item1',
-					imageUrl: 'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500360SBOX/1/WAP0500360SBOX.png'
-				},
-				{
-					id: 'item2', 
-					imageUrl: 'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500900E/1/WAP0500900E.png'
-				}
-			];
-
-			items.forEach(item => {
-				const imgElement = document.getElementById(item.id + '-image');
-				
-				// Create new image to test loading
-				const testImg = new Image();
-				testImg.onload = function() {
-					imgElement.src = item.imageUrl;
-					console.log('Image loaded successfully:', item.id);
-				};
-				testImg.onerror = function() {
-					console.log('Image failed, using text fallback for:', item.id);
-					// If direct image fails, use a simple text-based fallback
-					imgElement.style.display = 'none';
-					const fallback = document.createElement('div');
-					fallback.style.width = '150px';
-					fallback.style.height = '150px';
-					fallback.style.border = '1px solid black';
-					fallback.style.display = 'flex';
-					fallback.style.alignItems = 'center';
-					fallback.style.justifyContent = 'center';
-					fallback.style.backgroundColor = '#8c1515';
-					fallback.style.color = 'white';
-					fallback.style.fontSize = '12px';
-					fallback.style.textAlign = 'center';
-					fallback.style.padding = '10px';
-					fallback.style.fontWeight = 'bold';
-					fallback.innerHTML = item.id === 'item1' ? 'Porsche<br>Boxster<br>Key Ring' : 'Porsche<br>Crest<br>Key Ring';
-					imgElement.parentNode.appendChild(fallback);
-				};
-				testImg.src = item.imageUrl;
-			});
+			const item1Img = document.getElementById('item1-image');
+			const item2Img = document.getElementById('item2-image');
+			
+			// Set direct image URLs
+			item1Img.src = 'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500360SBOX/1/WAP0500360SBOX.png';
+			item2Img.src = 'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500900E/1/WAP0500900E.png';
+			
+			// Fallback if images fail to load
+			item1Img.onerror = function() {
+				this.style.display = 'none';
+				const fallback = document.createElement('div');
+				fallback.style.cssText = 'width: 150px; height: 150px; border: 1px solid black; display: flex; align-items: center; justify-content: center; background-color: #8c1515; color: white; font-size: 12px; text-align: center; padding: 10px; font-weight: bold;';
+				fallback.innerHTML = 'Porsche<br>Boxster<br>Key Ring';
+				this.parentNode.appendChild(fallback);
+			};
+			
+			item2Img.onerror = function() {
+				this.style.display = 'none';
+				const fallback = document.createElement('div');
+				fallback.style.cssText = 'width: 150px; height: 150px; border: 1px solid black; display: flex; align-items: center; justify-content: center; background-color: #8c1515; color: white; font-size: 12px; text-align: center; padding: 10px; font-weight: bold;';
+				fallback.innerHTML = 'Porsche<br>Crest<br>Key Ring';
+				this.parentNode.appendChild(fallback);
+			};
 		}
 
 		// Claim functionality

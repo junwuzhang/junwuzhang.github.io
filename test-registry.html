@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Registry</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="login" style="padding: 50px;">
+        <h2>Enter code:</h2>
+        <input type="text" id="code" placeholder="0101">
+        <button onclick="check()">Go</button>
+    </div>
+    
+    <div id="content" style="display: none; padding: 50px;">
+        <h2>Registry Items</h2>
+        <p>Item 1: Porsche Key Ring - $65</p>
+        <p>Item 2: Porsche Crest - $45</p>
+    </div>
+
+    <script>
+        function check() {
+            if (document.getElementById('code').value === '0101') {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            } else {
+                alert('Wrong code');
+            }
+        }
+    </script>
+</body>
+</html>
