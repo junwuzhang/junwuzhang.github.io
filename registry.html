@@ -21,9 +21,8 @@
 		<div class="card" style="width: 400px;">
 			<div class="card-body">
 				<h3 class="card-title text-center mb-4">2026 Specials!</h3>
-				<p class="text-center mb-4">Please enter the access code:</p>
 				<div class="form-group">
-					<input type="text" id="passwordInput" class="form-control" placeholder="Enter access code">
+					<input type="text" id="passwordInput" class="form-control" placeholder="Guess what this four-digit code should be? :)">
 				</div>
 				<button onclick="checkPassword()" class="btn btn-primary btn-block">Access Registry</button>
 				<div id="errorMessage" class="text-danger text-center mt-2" style="display: none;">Incorrect code. Please try again.</div>
@@ -68,7 +67,7 @@
 				</div>
 				<div class="col-md-9">
 					<b><font color="black">Porsche Key Ring with Boxster Lettering</font></b><br>
-					Price: $65.00<br>
+					Price: <span id="item1-price">$65.00</span><br>
 					Quantity: 1<br>
 					Status: <span id="item1-status" class="badge badge-success">Available</span><br>
 					<a href="https://shop.porsche.com/us/en-US/p/key-ring-with-boxster-lettering-P-WAP0500360SBOX/WAP0500360SBOX" target="_blank"><small>[View Item]</small></a><br>
@@ -83,7 +82,7 @@
 				</div>
 				<div class="col-md-9">
 					<b><font color="black">Porsche Crest Keyring Essential</font></b><br>
-					Price: $45.00<br>
+					Price: <span id="item2-price">$45.00</span><br>
 					Quantity: 1<br>
 					Status: <span id="item2-status" class="badge badge-success">Available</span><br>
 					<a href="https://shop.porsche.com/us/en-US/p/porsche-crest-keyring-essential-P-WAP0500900E/WAP0500900E" target="_blank"><small>[View Item]</small></a><br>
@@ -91,6 +90,53 @@
 				</div>
 			</div>
 			<hr>
+
+			<div class="row">
+				<div class="col-md-3">
+					<img class="img-fluid img-rounded" src="https://m.media-amazon.com/images/I/81zzoh0Q5vL._SL1500_.jpg" style="border:1px solid black; width: 150px; height: 150px; object-fit: cover;" alt="Philips Norelco SH30/52 Replacement Heads">
+				</div>
+				<div class="col-md-9">
+					<b><font color="black">Philips Norelco SH30/52 Replacement Heads</font></b><br>
+					Price: <span id="item3-price">$24.96</span><br>
+					Quantity: 1<br>
+					Status: <span id="item3-status" class="badge badge-success">Available</span><br>
+					<a href="https://www.amazon.com/dp/B01GTNVWOO" target="_blank"><small>[View Item]</small></a><br>
+					<button id="claim-item3" class="btn btn-sm btn-primary mt-2" onclick="claimItem('item3')">Mark as Claimed</button>
+				</div>
+			</div>
+			<hr>
+
+			<div class="row">
+				<div class="col-md-3">
+					<img class="img-fluid img-rounded" src="https://m.media-amazon.com/images/I/516TMa1NfIL._SL1000_.jpg" style="border:1px solid black; width: 150px; height: 150px; object-fit: cover;" alt="Fresh Produce (Brands Vary)">
+				</div>
+				<div class="col-md-9">
+					<b><font color="black">Fresh Produce (Brands Vary)</font></b><br>
+					Price: <span id="item4-price">$2.48</span><br>
+					Quantity: 1<br>
+					Status: <span id="item4-status" class="badge badge-success">Available</span><br>
+					<a href="https://www.amazon.com/dp/B0050PRDWS" target="_blank"><small>[View Item]</small></a><br>
+					<button id="claim-item4" class="btn btn-sm btn-primary mt-2" onclick="claimItem('item4')">Mark as Claimed</button>
+				</div>
+			</div>
+			<hr>
+
+			<!--
+			<div class="row">
+				<div class="col-md-3">
+					<img class="img-fluid img-rounded" src="https://m.media-amazon.com/images/I/71fDJ3L4mbL._AC_SL1500_.jpg" style="border:1px solid black; width: 150px; height: 150px; object-fit: cover;" alt="Milwaukee M12 REDLITHIUM XC 4.0 Battery">
+				</div>
+				<div class="col-md-9">
+					<b><font color="black">Milwaukee M12 REDLITHIUM XC 4.0 Battery</font></b><br>
+					Price: <span id="item5-price">See listing</span><br>
+					Quantity: 1<br>
+					Status: <span id="item5-status" class="badge badge-success">Available</span><br>
+					<a href="https://www.amazon.com/dp/B00BYFO1AA" target="_blank"><small>[View Item]</small></a><br>
+					<button id="claim-item5" class="btn btn-sm btn-primary mt-2" onclick="claimItem('item5')">Mark as Claimed</button>
+				</div>
+			</div>
+			<hr>
+			-->
 		</div><br><br>
 
 		<div class="container">
@@ -122,12 +168,13 @@
 			
 			console.log('Checking password:', password); // Debug
 			
-			if (password === '0101') {
+			if (password === '0407') {
 				console.log('Password correct, showing main content'); // Debug
 				
 				// Force hide password section
 				const passwordDiv = document.getElementById('passwordProtection');
-				passwordDiv.style.display = 'none';
+				passwordDiv.classList.remove('d-flex', 'align-items-center', 'justify-content-center');
+				passwordDiv.style.setProperty('display', 'none', 'important');
 				passwordDiv.style.visibility = 'hidden';
 				passwordDiv.style.opacity = '0';
 				
@@ -137,9 +184,16 @@
 				mainDiv.style.visibility = 'visible';
 				mainDiv.style.opacity = '1';
 				mainDiv.style.position = 'static';
+
+				// Ensure the unlocked registry starts at the top of the page
+				window.scrollTo(0, 0);
+				document.documentElement.scrollTop = 0;
+				document.body.scrollTop = 0;
 				
 				// Load images after successful login
 				loadImages();
+				// Load latest prices for Porsche items
+				loadPrices();
 				// Restore claimed status
 				restoreClaimedStatus();
 			} else {
@@ -163,49 +217,182 @@
 
 		// Dynamic image loading
 		function loadImages() {
-			// Use direct Porsche image URLs that should work without CORS issues
+			// Try real Porsche product assets first, then fall back to legacy URLs
 			const items = [
 				{
 					id: 'item1',
-					imageUrl: 'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500360SBOX/1/WAP0500360SBOX.png'
+					imageUrls: [
+						'https://product-domain-assets.ppim.aws.porsche.cloud/porsche-prod/25/10/20/2733/wap0500360sbox-001.webp',
+						'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500360SBOX/1/WAP0500360SBOX.png'
+					]
 				},
 				{
 					id: 'item2', 
-					imageUrl: 'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500900E/1/WAP0500900E.png'
+					imageUrls: [
+						'https://shop.porsche.com/_next/image?url=https%3A%2F%2Fproduct-domain-assets.ppim.aws.porsche.cloud%2Fporsche-prod%2F25%2F10%2F20%2F2668%2Fwap0500900e-001.webp&w=2560&q=75',
+						'https://product-domain-assets.ppim.aws.porsche.cloud/porsche-prod/25/10/20/2668/wap0500900e-001.webp',
+						'https://shop.porsche.com/on/demandware.static/-/Library-Sites-PorscheShared/default/dw1f6c1e91/images/WAP0500900E/1/WAP0500900E.png'
+					]
 				}
 			];
 
 			items.forEach(item => {
 				const imgElement = document.getElementById(item.id + '-image');
-				
-				// Create new image to test loading
-				const testImg = new Image();
-				testImg.onload = function() {
-					imgElement.src = item.imageUrl;
-					console.log('Image loaded successfully:', item.id);
-				};
-				testImg.onerror = function() {
-					console.log('Image failed, using text fallback for:', item.id);
-					// If direct image fails, use a simple text-based fallback
-					imgElement.style.display = 'none';
-					const fallback = document.createElement('div');
-					fallback.style.width = '150px';
-					fallback.style.height = '150px';
-					fallback.style.border = '1px solid black';
-					fallback.style.display = 'flex';
-					fallback.style.alignItems = 'center';
-					fallback.style.justifyContent = 'center';
-					fallback.style.backgroundColor = '#8c1515';
-					fallback.style.color = 'white';
-					fallback.style.fontSize = '12px';
-					fallback.style.textAlign = 'center';
-					fallback.style.padding = '10px';
-					fallback.style.fontWeight = 'bold';
-					fallback.innerHTML = item.id === 'item1' ? 'Porsche<br>Boxster<br>Key Ring' : 'Porsche<br>Crest<br>Key Ring';
-					imgElement.parentNode.appendChild(fallback);
-				};
-				testImg.src = item.imageUrl;
+
+				let currentIndex = 0;
+
+				function tryNextImage() {
+					if (currentIndex >= item.imageUrls.length) {
+						console.log('All image URLs failed, using text fallback for:', item.id);
+						imgElement.style.display = 'none';
+						const fallback = document.createElement('div');
+						fallback.style.width = '150px';
+						fallback.style.height = '150px';
+						fallback.style.border = '1px solid black';
+						fallback.style.display = 'flex';
+						fallback.style.alignItems = 'center';
+						fallback.style.justifyContent = 'center';
+						fallback.style.backgroundColor = '#8c1515';
+						fallback.style.color = 'white';
+						fallback.style.fontSize = '12px';
+						fallback.style.textAlign = 'center';
+						fallback.style.padding = '10px';
+						fallback.style.fontWeight = 'bold';
+						fallback.innerHTML = item.id === 'item1' ? 'Porsche<br>Boxster<br>Key Ring' : 'Porsche<br>Crest<br>Key Ring';
+						imgElement.parentNode.appendChild(fallback);
+						return;
+					}
+
+					const nextUrl = item.imageUrls[currentIndex];
+					const testImg = new Image();
+
+					testImg.onload = function() {
+						imgElement.src = nextUrl;
+						console.log('Image loaded successfully:', item.id, nextUrl);
+					};
+
+					testImg.onerror = function() {
+						currentIndex += 1;
+						tryNextImage();
+					};
+
+					testImg.src = nextUrl;
+				}
+
+				tryNextImage();
 			});
+		}
+
+		function extractPriceFromText(text, hints) {
+			const normalizedHints = (hints || []).map(hint => hint.toLowerCase());
+			const haystack = text.toLowerCase();
+
+			const priceRegex = /\$\s?\d{1,4}(?:,\d{3})*(?:\.\d{2})?/g;
+			const structuredPriceRegexes = [
+				/"price"\s*:\s*"?(\d+(?:\.\d{1,2})?)"?/i,
+				/"priceToPay"[^\n\r]{0,200}?"amount"\s*:\s*(\d+(?:\.\d{1,2})?)/i,
+				/current\s+price[^\$]{0,40}\$\s?(\d{1,4}(?:,\d{3})*(?:\.\d{2})?)/i
+			];
+
+			for (const regex of structuredPriceRegexes) {
+				const match = text.match(regex);
+				if (match && match[1]) {
+					return '$' + Number(match[1].replace(/,/g, '')).toFixed(2);
+				}
+			}
+
+			for (const hint of normalizedHints) {
+				const hintIndex = haystack.indexOf(hint);
+				if (hintIndex !== -1) {
+					const start = Math.max(0, hintIndex - 3000);
+					const end = Math.min(text.length, hintIndex + 3000);
+					const nearbyText = text.slice(start, end);
+					const nearbyMatches = nearbyText.match(priceRegex);
+					if (nearbyMatches && nearbyMatches.length > 0) {
+						return nearbyMatches[0].replace(/\s+/g, '');
+					}
+				}
+			}
+
+			const allMatches = text.match(priceRegex);
+			if (allMatches && allMatches.length > 0) {
+				return allMatches[0].replace(/\s+/g, '');
+			}
+
+			return null;
+		}
+
+		async function fetchProductPrice(productUrl, hints) {
+			const fetchTargets = [
+				productUrl,
+				'https://r.jina.ai/http://' + productUrl.replace(/^https?:\/\//, '')
+			];
+
+			for (const target of fetchTargets) {
+				try {
+					const response = await fetch(target);
+					if (!response.ok) {
+						continue;
+					}
+
+					const text = await response.text();
+					const parsedPrice = extractPriceFromText(text, hints);
+
+					if (parsedPrice) {
+						return parsedPrice;
+					}
+				} catch (error) {
+					console.log('Price fetch failed for target:', target, error);
+				}
+			}
+
+			return null;
+		}
+
+		async function loadPrices() {
+			const products = [
+				{
+					priceElementId: 'item1-price',
+					productUrl: 'https://shop.porsche.com/us/en-US/p/key-ring-with-boxster-lettering-P-WAP0500360SBOX/WAP0500360SBOX',
+					hints: ['WAP0500360SBOX', 'boxster lettering'],
+					fallbackPrice: '$65.00'
+				},
+				{
+					priceElementId: 'item2-price',
+					productUrl: 'https://shop.porsche.com/us/en-US/p/porsche-crest-keyring-essential-P-WAP0500900E/WAP0500900E',
+					hints: ['WAP0500900E', 'crest keyring'],
+					fallbackPrice: '$45.00'
+				},
+				{
+					priceElementId: 'item3-price',
+					productUrl: 'https://www.amazon.com/dp/B01GTNVWOO',
+					hints: ['B01GTNVWOO', 'SH30/52', 'Norelco'],
+					fallbackPrice: '$24.96'
+				},
+				{
+					priceElementId: 'item4-price',
+					productUrl: 'https://www.amazon.com/dp/B0050PRDWS',
+					hints: ['B0050PRDWS', 'Fresh Produce'],
+					fallbackPrice: '$2.48',
+					staticPrice: '$2.48'
+				}
+			];
+
+			await Promise.all(products.map(async product => {
+				const priceElement = document.getElementById(product.priceElementId);
+				if (!priceElement) {
+					return;
+				}
+
+				if (product.staticPrice) {
+					priceElement.textContent = product.staticPrice;
+					return;
+				}
+
+				priceElement.textContent = 'Loading...';
+				const latestPrice = await fetchProductPrice(product.productUrl, product.hints);
+				priceElement.textContent = latestPrice || product.fallbackPrice;
+			}));
 		}
 
 		// Claim functionality
@@ -240,7 +427,7 @@
 
 		// Restore claimed status on load
 		function restoreClaimedStatus() {
-			const items = ['item1', 'item2'];
+			const items = ['item1', 'item2', 'item3', 'item4'];
 			items.forEach(itemId => {
 				if (localStorage.getItem(itemId + '-claimed') === 'true') {
 					const statusElement = document.getElementById(itemId + '-status');
