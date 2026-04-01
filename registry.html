@@ -78,6 +78,21 @@
 
 			<div class="row">
 				<div class="col-md-3">
+					<img class="img-fluid img-rounded" src="https://m.media-amazon.com/images/I/41bRvr4C+6L._AC_SL1000_.jpg" style="border:1px solid black; width: 150px; height: 150px; object-fit: cover;" alt="Oral-B CrossAction Toothbrush Replacement Heads">
+				</div>
+				<div class="col-md-9">
+					<b><font color="black">Oral-B CrossAction Replacement Heads</font></b><br>
+					Price: <span id="item5-price">See listing</span><br>
+					Quantity: 1<br>
+					Status: <span id="item5-status" class="badge badge-success">Available</span><br>
+					<a href="https://www.amazon.com/dp/B00LVUSVU4" target="_blank"><small>[View Item]</small></a><br>
+					<button id="claim-item5" class="btn btn-sm btn-primary mt-2" onclick="claimItem('item5')">Mark as Claimed</button>
+				</div>
+			</div>
+			<hr>
+
+			<div class="row">
+				<div class="col-md-3">
 					<img id="item2-image" class="img-fluid img-rounded" style="border:1px solid black; width: 150px; height: 150px; object-fit: cover;" alt="Loading...">
 				</div>
 				<div class="col-md-9">
@@ -355,13 +370,13 @@
 					priceElementId: 'item1-price',
 					productUrl: 'https://shop.porsche.com/us/en-US/p/key-ring-with-boxster-lettering-P-WAP0500360SBOX/WAP0500360SBOX',
 					hints: ['WAP0500360SBOX', 'boxster lettering'],
-					fallbackPrice: '$65.00'
+					fallbackPrice: '$59.00'
 				},
 				{
 					priceElementId: 'item2-price',
 					productUrl: 'https://shop.porsche.com/us/en-US/p/porsche-crest-keyring-essential-P-WAP0500900E/WAP0500900E',
 					hints: ['WAP0500900E', 'crest keyring'],
-					fallbackPrice: '$45.00'
+					fallbackPrice: '$55.00'
 				},
 				{
 					priceElementId: 'item3-price',
@@ -375,6 +390,12 @@
 					hints: ['B0050PRDWS', 'Fresh Produce'],
 					fallbackPrice: '$2.48',
 					staticPrice: '$2.48'
+				},
+				{
+					priceElementId: 'item5-price',
+					productUrl: 'https://www.amazon.com/dp/B00LVUSVU4',
+					hints: ['B00LVUSVU4', 'Oral-B', 'CrossAction'],
+					fallbackPrice: '$18.29'
 				}
 			];
 
@@ -427,7 +448,7 @@
 
 		// Restore claimed status on load
 		function restoreClaimedStatus() {
-			const items = ['item1', 'item2', 'item3', 'item4'];
+			const items = ['item1', 'item2', 'item3', 'item4', 'item5'];
 			items.forEach(itemId => {
 				if (localStorage.getItem(itemId + '-claimed') === 'true') {
 					const statusElement = document.getElementById(itemId + '-status');
