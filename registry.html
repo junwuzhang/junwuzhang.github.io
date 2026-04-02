@@ -136,6 +136,21 @@
 			</div>
 			<hr>
 
+			<div class="row">
+				<div class="col-md-3">
+					<img class="img-fluid img-rounded" src="https://m.media-amazon.com/images/I/71O6EsQ5lqL._AC_SL1500_.jpg" style="border:1px solid black; width: 150px; height: 150px; object-fit: cover;" alt="Mrs. Meyer's Clean Day Biodegradable Hand Soap">
+				</div>
+				<div class="col-md-9">
+					<b><font color="black">Mrs. Meyer's Clean Day Hand Soap</font></b><br>
+					Price: <span id="item6-price">$6.87</span><br>
+					Quantity: 1<br>
+					Status: <span id="item6-status" class="badge badge-success">Available</span><br>
+					<a href="https://www.amazon.com/dp/B00F1U0YB4" target="_blank"><small>[View Item]</small></a><br>
+					<button id="claim-item6" class="btn btn-sm btn-primary mt-2" onclick="claimItem('item6')">Mark as Claimed</button>
+				</div>
+			</div>
+			<hr>
+
 			<!--
 			<div class="row">
 				<div class="col-md-3">
@@ -396,6 +411,12 @@
 					productUrl: 'https://www.amazon.com/dp/B00LVUSVU4',
 					hints: ['B00LVUSVU4', 'Oral-B', 'CrossAction'],
 					fallbackPrice: '$18.29'
+				},
+				{
+					priceElementId: 'item6-price',
+					productUrl: 'https://www.amazon.com/dp/B00F1U0YB4',
+					hints: ['B00F1U0YB4', "Mrs. Meyer's", 'Clean Day'],
+					fallbackPrice: '$6.87'
 				}
 			];
 
@@ -448,7 +469,7 @@
 
 		// Restore claimed status on load
 		function restoreClaimedStatus() {
-			const items = ['item1', 'item2', 'item3', 'item4', 'item5'];
+			const items = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'];
 			items.forEach(itemId => {
 				if (localStorage.getItem(itemId + '-claimed') === 'true') {
 					const statusElement = document.getElementById(itemId + '-status');
